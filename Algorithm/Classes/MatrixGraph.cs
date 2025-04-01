@@ -13,13 +13,11 @@ public class MatrixGraph
     public void AddEdge(int i, int j)
     {
         matrix[i, j] = 1;
-        matrix[j, i] = 1;
     }
     // IF NEEDED
     // public void RemoveEdge(int i, int j)
     // {
     //     matrix[i, j] = 0;
-    //     matrix[j, i] = 1;
     // }
 
     public bool HasEdge(int i, int j)
