@@ -6,23 +6,49 @@ class TopologicalSort
 {
     private DepthFirstSearch dfs;
 
-    public TopologicalSort(Dictionary<int, List<int>> graph)
+    public TopologicalSort(object graphInput)
     {
-        dfs = new DepthFirstSearch(graph);  
+        if (graphInput is int[,])  
+        {
+            dfs = new DepthFirstSearch((int[,])graphInput);
+        }
+        else if (graphInput is Dictionary<int, List<int>>)  
+        {
+            dfs = new DepthFirstSearch((Dictionary<int, List<int>>)graphInput);
+        }
+        else
+        {
+            throw new ArgumentException("Invalid graph input type.");
+        }
     }
     
     public List<int> Sort()
     {
         Stack<int> stack = new Stack<int>();
         Dictionary<int, List<int>> graph = dfs.graph;
-
-        foreach (var vertex in graph.Keys)
+        
+        if (dfs.graph != null)
         {
-            if (!dfs.visited.Contains(vertex))
+            foreach (var vertex in graph.Keys)
             {
-                dfs.PerformDFS(vertex, stack);
+                if (!dfs.visited.Contains(vertex))
+                {
+                    dfs.PerformDFS(vertex, stack);
+                }
             }
         }
+        else if (dfs.matrixGraph != null)  
+        {
+            int n = dfs.matrixGraph.GetLength(0);
+            for (int i = 0; i < n; i++)
+            {
+                if (!dfs.visited.Contains(i))
+                {
+                    dfs.PerformDFS(i, stack);
+                }
+            }
+        }
+        
 
         List<int> result = new List<int>();
         while (stack.Count > 0)
@@ -30,27 +56,5 @@ class TopologicalSort
             result.Add(stack.Pop());
         }
         return result;
-    }
-
-    public static void Main(string[] args)
-    {
-        Dictionary<int, List<int>> graph = new Dictionary<int, List<int>>()
-        {
-            { 0, new List<int> { 1, 2 } },
-            { 1, new List<int> { 3 } },
-            { 2, new List<int> { 3 } },
-            { 3, new List<int> { 4 } },
-            { 4, new List<int>() }  
-        };
-
-        TopologicalSort ts = new TopologicalSort(graph);
-
-        List<int> result = ts.Sort();
-
-        Console.WriteLine("Topological Sort:");
-        foreach (var vertex in result)
-        {
-            Console.Write(vertex + " ");
-        }
     }
 }
