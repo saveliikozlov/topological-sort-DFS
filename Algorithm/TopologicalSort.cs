@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 class TopologicalSort
 {
-    private DepthFirstSearch dfs;
-
+    public DepthFirstSearch dfs;
     public TopologicalSort(object graphInput)
     {
         if (graphInput is int[,])  
@@ -49,7 +48,6 @@ class TopologicalSort
             }
         }
         
-
         List<int> result = new List<int>();
         while (stack.Count > 0)
         {
