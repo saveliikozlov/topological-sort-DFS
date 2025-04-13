@@ -49,13 +49,13 @@ public static class Testing
                     var edges = generator.GenerateGraph(vertices, density);
                     if (num == 1)
                     {
-                        TestList(vertices, density, edges);
-                        TestMatrix(vertices, density, edges);
+                        TestList(vertices, Math.Round(density, 1), edges);
+                        TestMatrix(vertices, Math.Round(density, 1), edges);
                     }
                     else if (num == 2)
                     {
-                        TestMatrix(vertices, density, edges);
-                        TestList(vertices, density, edges);
+                        TestMatrix(vertices, Math.Round(density, 1), edges);
+                        TestList(vertices, Math.Round(density, 1), edges);
                     }
                 }
             }
