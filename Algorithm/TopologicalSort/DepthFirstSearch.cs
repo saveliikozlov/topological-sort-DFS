@@ -2,30 +2,30 @@ namespace Algorithm;
 
 public class DepthFirstSearch
 {
-    public Dictionary<int, List<int>> graph;
+    public List<int>[] listGraph;
     public HashSet<int> visited;
     public int[,] matrixGraph;
  
 
-    public DepthFirstSearch(Dictionary<int, List<int>> graph)
+    public DepthFirstSearch(List<int>[] listGraph)
     {
-        this.graph = graph;  
-        this.visited = new HashSet<int>();
-        this.matrixGraph = null;
+        this.listGraph = listGraph;  
+        visited = new HashSet<int>();
+        matrixGraph = null;
     }
     public DepthFirstSearch(int[,] matrixGraph)
     {
         this.matrixGraph = matrixGraph;
-        this.visited = new HashSet<int>();
-        this.graph = null;  
+        visited = new HashSet<int>();
+        listGraph = null;  
     }
     
     public void PerformDFS(int v, Stack<int> stack)
     {
         visited.Add(v);
-        if (graph != null)
+        if (listGraph != null)
         {
-            foreach (var neighbor in graph[v])
+            foreach (var neighbor in listGraph[v])
             {
                 if (!visited.Contains(neighbor))
                 {

@@ -27,7 +27,7 @@ public class MatrixGraph
         return false;
     }
 
-    public void PrintMatrix()
+    public void Print()
     {
         Console.WriteLine("Adjacency matrix:");
         for (int i = 0; i < vertices; i++)

@@ -11,9 +11,9 @@ class TopologicalSort
         {
             dfs = new DepthFirstSearch((int[,])graphInput);
         }
-        else if (graphInput is Dictionary<int, List<int>>)  
+        else if (graphInput is List<int>[])  
         {
-            dfs = new DepthFirstSearch((Dictionary<int, List<int>>)graphInput);
+            dfs = new DepthFirstSearch((List<int>[])graphInput);
         }
         else
         {
@@ -23,16 +23,17 @@ class TopologicalSort
     
     public List<int> Sort()
     {
-        Stack<int> stack = new Stack<int>();
-        Dictionary<int, List<int>> graph = dfs.graph;
+        var stack = new Stack<int>();
+        List<int>[] graph = dfs.listGraph;
         
-        if (dfs.graph != null)
+        if (dfs.listGraph != null)
         {
-            foreach (var vertex in graph.Keys)
+            var vertexCount = dfs.listGraph.Length;
+            for (int i = 0; i < vertexCount; i++)
             {
-                if (!dfs.visited.Contains(vertex))
+                if (!dfs.visited.Contains(i))
                 {
-                    dfs.PerformDFS(vertex, stack);
+                    dfs.PerformDFS(i, stack);
                 }
             }
         }
